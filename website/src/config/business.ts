@@ -4,6 +4,11 @@ export const business = {
   tagline: 'Purely eggless. Just enough sweet.',
   instagramHandle: '@melt.bakers',
   instagramUrl: 'https://www.instagram.com/melt.bakers/',
+  documentation: {
+    bakeryOs: 'https://github.com/dheerix/melt/tree/main/docs',
+    roadmap: 'https://github.com/dheerix/melt/blob/main/docs/12-launch.md',
+    sops: 'https://github.com/dheerix/melt/tree/main/docs/sops',
+  },
   contactEmail: 'hello@example.com', // TODO: Confirm with MELT before displaying publicly.
   serviceArea: 'Waterloo Region, Ontario',
   pickupWording: 'Pickup details are shared after your order is confirmed.',

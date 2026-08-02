@@ -106,7 +106,16 @@ export default function Home(): ReactNode {
         <section className={styles.finalCta}><p className={styles.eyebrow}>Your celebration, thoughtfully baked</p><Heading as="h2">Made for the moments worth melting into.</Heading><InstagramLink className={styles.creamButton}>Start an enquiry on Instagram <span aria-hidden="true">↗</span></InstagramLink></section>
       </main>
       <footer className={styles.siteFooter}>
-        <div><strong>{business.name}</strong><p>{business.tagline}</p></div><div><p>{business.serviceArea}</p><InstagramLink>{business.instagramHandle}</InstagramLink></div><p className={styles.footerAllergy}>{business.allergyStatement}</p><p>© {new Date().getFullYear()} {business.name}</p>
+        <div><strong>{business.name}</strong><p>{business.tagline}</p></div>
+        <div><p>{business.serviceArea}</p><InstagramLink>{business.instagramHandle}</InstagramLink></div>
+        <nav className={styles.footerDocs} aria-label="Private project documentation">
+          <strong>Project</strong>
+          <a href={business.documentation.bakeryOs} target="_blank" rel="noreferrer">Bakery OS <span aria-hidden="true">↗</span></a>
+          <a href={business.documentation.roadmap} target="_blank" rel="noreferrer">Roadmap <span aria-hidden="true">↗</span></a>
+          <a href={business.documentation.sops} target="_blank" rel="noreferrer">SOPs <span aria-hidden="true">↗</span></a>
+          <small>Private GitHub access required</small>
+        </nav>
+        <p className={styles.footerAllergy}>{business.allergyStatement}</p><p>© {new Date().getFullYear()} {business.name}</p>
       </footer>
     </Layout>
   );

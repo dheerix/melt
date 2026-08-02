@@ -21,19 +21,21 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
+          cache-dependency-path: website/package-lock.json
       - run: npm ci
+        working-directory: website
       - name: Build
         run: npm run build
+        working-directory: website
         env:
           GITHUB_USERNAME: ${{ github.repository_owner }}
           GITHUB_REPOSITORY_NAME: ${{ github.event.repository.name }}
-          SHOW_BAKERY_OS: 'false'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: website/build
 
   deploy:
     environment:

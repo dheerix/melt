@@ -1,105 +1,78 @@
-# MELT Bakery
+# MELT
 
-A maintainable Docusaurus 3 site for MELT, a founder-operated, made-to-order eggless home bakery serving Waterloo Region. It combines a custom public landing page with a privacy-safe Bakery OS documentation framework.
+MELT is a founder-operated, made-to-order eggless home bakery serving Waterloo Region. This repository manages the public landing page and private-minded business planning framework.
+
+## Repository structure
+
+- `website/` — the deployable Docusaurus landing page and public assets
+- `docs/` — strategy, research, playbooks, operations, SOPs, and photography guidance
+- `private-data/` — ignored local working area; see its example README
+
+Only `website/build` is uploaded to GitHub Pages. The repository README and root `docs/` are not part of the website build.
 
 > [!WARNING]
-> **Anything committed to a public GitHub repository can become public.** Hiding Bakery OS from navigation does not make its files private. Never commit customer data, a residential address, personal contact details, recipes, supplier accounts, costs, revenue, passwords, tokens, or private incidents. Use an access-controlled system for sensitive records; `private-data/` is ignored only as a local safety net.
+> Repository visibility and website visibility are separate. A GitHub Pages deployment is normally public even when its source repository is private. Never commit customer data, residential addresses, personal contact details, recipes, supplier accounts, costs, revenue, credentials, or private incidents.
 
-## Local setup
+## Run the landing page locally
 
-Requires Node.js 20 LTS (Node 18+ is accepted by the project).
+Requires Node.js 20 or newer.
 
 ```bash
+cd website
 npm install
 npm start
 ```
 
-The development site includes Bakery OS navigation for easy editing. Build the same public-safe output used by GitHub Pages:
+Build and type-check:
 
 ```bash
-GITHUB_USERNAME=your-github-username \
-GITHUB_REPOSITORY_NAME=melt-bakery \
-SHOW_BAKERY_OS=false \
+cd website
 npm run build
+npm run typecheck
 ```
 
-Run `npm run typecheck` for a separate TypeScript check.
+## Edit public content
 
-## Update the site
+- Business details and policy placeholders: `website/src/config/business.ts`
+- Product collection: `website/src/data/products.ts`
+- Landing page: `website/src/pages/index.tsx`
+- Visual design: `website/src/pages/index.module.css` and `website/src/css/custom.css`
+- Images: `website/static/img/`
 
-- Business details and policy placeholders: `src/config/business.ts`
-- Products, descriptions, image paths, and availability: `src/data/products.ts`
-- Homepage structure and copy: `src/pages/index.tsx`
-- Visual system: `src/pages/index.module.css` and `src/css/custom.css`
-- Bakery OS: Markdown files in `docs/`
-- Photography guidance: `docs/photography-guide.md`
+The generated rasmalai image and SVG product artwork are placeholders. Replace them with approved MELT photography and accurate alt text. Do not publish fabricated prices or definitive policies that MELT has not confirmed.
 
-Replace files in `static/img/products/` with approved MELT photography and update product paths and alt text. The generated rasmalai cake image and illustrated product cards are placeholders; recommended crops and dimensions are in the photography guide.
+## Manage the roadmap and operating documentation
 
-Policy text labelled **Confirm with MELT** is deliberately unresolved. Confirm it before making a definitive public claim. The contact email is a placeholder and is not currently displayed.
+Root-level `docs/` contains Bakery OS strategy and SOP templates. These files are for managing the business repository and are deliberately excluded from Docusaurus. Edit them as Markdown and keep all sensitive records outside Git.
 
-## Bakery OS publication switch
+Hiding or excluding documentation from a build does not make committed files private if the repository later becomes public.
 
-Production navigation is hidden by default. Set `SHOW_BAKERY_OS=true` to show it. This is only discoverability control: Docusaurus still builds the docs, and all committed Markdown remains readable in a public repository.
+## GitHub Pages
 
-If the documents ever contain sensitive information, remove them from the public repository and place them in a genuinely private system. Do not rely on navigation, `robots.txt`, unlisted URLs, or Git history rewrites as access control.
+The workflow at `.github/workflows/deploy.yml`:
 
-## GitHub Pages configuration
+1. Installs dependencies in `website/`.
+2. Builds only the Docusaurus landing-page application.
+3. Uploads only `website/build`.
+4. Deploys the artifact with GitHub Pages Actions.
 
-`docusaurus.config.ts` reads these environment variables:
+For this repository, the site URL is:
 
 ```text
-GITHUB_USERNAME=your-github-username
-GITHUB_REPOSITORY_NAME=melt-bakery
+https://dheerix.github.io/melt/
 ```
 
-For a project site, these create:
+In GitHub, select **Settings → Pages → Build and deployment → GitHub Actions**. Do not select “Deploy from a branch”; that can expose rendered repository content instead of the Docusaurus build.
 
-```text
-url: https://your-github-username.github.io
-baseUrl: /melt-bakery/
-```
-
-The workflow fills both values from the GitHub repository automatically. The sitemap and generated `robots.txt` use the resulting deployment URL.
-
-If the repository itself is named `your-github-username.github.io`, change `baseUrl` in `docusaurus.config.ts` to `'/'` (or add an equivalent conditional) and use the account site URL.
-
-## Create and push the repository
-
-This project is initialized locally but no remote is created or contacted. To create a public repo with GitHub CLI and push it:
-
-```bash
-cd /Users/dj/Documents/Programming/melt
-gh repo create melt-bakery --public --source=. --remote=origin
-git push -u origin main
-```
-
-Or create an empty `melt-bakery` repository in GitHub, then:
-
-```bash
-cd /Users/dj/Documents/Programming/melt
-git remote add origin https://github.com/YOUR_USERNAME/melt-bakery.git
-git push -u origin main
-```
-
-In GitHub, open **Settings → Pages → Build and deployment** and select **GitHub Actions** as the source. Pushes to `main` and manual workflow runs build and deploy through `.github/workflows/deploy.yml`.
-
-For a future custom domain, add the domain in **Settings → Pages**, configure the DNS records GitHub specifies, enable HTTPS, and update `url`/`baseUrl` plus canonical references. Add a `static/CNAME` file only after the domain is confirmed.
+After changing the publishing source, run **Actions → Deploy to GitHub Pages → Run workflow** or push a commit to `main`.
 
 ## Launch checklist
 
-- [ ] Replace `GITHUB_USERNAME` and verify the repository name/base URL.
-- [ ] Replace placeholder images with approved MELT photography where available.
-- [ ] Confirm every policy marked “Confirm with MELT.”
-- [ ] Confirm whether the placeholder contact email should be replaced and displayed.
-- [ ] Review products, dietary notes, and availability with MELT.
-- [ ] Verify compliance, labelling, and food-safety requirements using current official sources.
-- [ ] Confirm no address, customer data, recipes, costs, finances, credentials, or incidents are staged.
-- [ ] Run `npm run typecheck` and the production build command above.
-- [ ] Test navigation, Instagram links, mobile layout, keyboard focus, metadata, and structured data.
-- [ ] Enable GitHub Pages using GitHub Actions and check the deployed URL.
-- [ ] Review the allergy statement immediately before launch.
-
-## Asset note
-
-The raster hero placeholder was produced with the built-in image generator using this direction: premium editorial food photography of an ivory rasmalai-inspired celebration cake, pistachio and saffron detail, warm cream plaster, forest-green linen, restrained brass, soft window light, wide composition, no people/logos/text/prices. It is a visual concept, not evidence of an actual MELT product.
+- [ ] GitHub Pages source is set to **GitHub Actions**.
+- [ ] The deployment shows the MELT landing page, not this README.
+- [ ] Product imagery and copy are approved.
+- [ ] Policies marked “Confirm with MELT” are reviewed.
+- [ ] No sensitive business or customer information is committed.
+- [ ] Instagram links work.
+- [ ] Mobile and desktop layouts are checked.
+- [ ] Production build and type-check pass.

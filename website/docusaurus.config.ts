@@ -3,10 +3,8 @@ import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
 import {writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 
-const githubUsername = process.env.GITHUB_USERNAME ?? 'GITHUB_USERNAME';
-const repositoryName = process.env.GITHUB_REPOSITORY_NAME ?? 'melt-bakery';
-const isProduction = process.env.NODE_ENV === 'production';
-const showBakeryOs = process.env.SHOW_BAKERY_OS === 'true' || !isProduction;
+const githubUsername = process.env.GITHUB_USERNAME ?? 'dheerix';
+const repositoryName = process.env.GITHUB_REPOSITORY_NAME ?? 'melt';
 
 const config: Config = {
   title: 'MELT Bakery',
@@ -24,7 +22,7 @@ const config: Config = {
   i18n: {defaultLocale: 'en', locales: ['en']},
   presets: [
     ['classic', {
-      docs: {sidebarPath: './sidebars.ts', routeBasePath: 'bakery-os', showLastUpdateTime: true},
+      docs: false,
       blog: false,
       theme: {customCss: './src/css/custom.css'},
       sitemap: {changefreq: 'weekly', priority: 0.5},
@@ -55,7 +53,6 @@ const config: Config = {
         {to: '/#story', label: 'Our Story', position: 'right'},
         {to: '/#order', label: 'How to Order', position: 'right'},
         {to: '/#faq', label: 'FAQ', position: 'right'},
-        ...(showBakeryOs ? [{to: '/bakery-os/vision', label: 'Bakery OS', position: 'right' as const}] : []),
         {href: 'https://www.instagram.com/melt.bakers/', label: 'Order on Instagram', position: 'right', className: 'navbar-instagram'},
       ],
     },

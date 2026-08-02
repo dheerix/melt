@@ -1,0 +1,52 @@
+import type {Config} from '@docusaurus/types';
+import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
+
+const githubUsername = process.env.GITHUB_USERNAME ?? 'GITHUB_USERNAME';
+const repositoryName = process.env.GITHUB_REPOSITORY_NAME ?? 'melt-bakery';
+const isProduction = process.env.NODE_ENV === 'production';
+const showBakeryOs = process.env.SHOW_BAKERY_OS === 'true' || !isProduction;
+
+const config: Config = {
+  title: 'MELT Bakery',
+  tagline: 'Purely eggless. Just enough sweet.',
+  favicon: 'img/brand/favicon.svg',
+  url: `https://${githubUsername}.github.io`,
+  baseUrl: `/${repositoryName}/`,
+  organizationName: githubUsername,
+  projectName: repositoryName,
+  trailingSlash: false,
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  i18n: {defaultLocale: 'en', locales: ['en']},
+  presets: [
+    ['classic', {
+      docs: {sidebarPath: './sidebars.ts', routeBasePath: 'bakery-os', showLastUpdateTime: true},
+      blog: false,
+      theme: {customCss: './src/css/custom.css'},
+      sitemap: {changefreq: 'weekly', priority: 0.5},
+    } satisfies Options],
+  ],
+  themeConfig: {
+    image: 'img/brand/social-card.svg',
+    metadata: [
+      {name: 'description', content: 'Eggless, made-to-order celebration bakes in Waterloo Region, Ontario.'},
+      {property: 'og:type', content: 'website'},
+    ],
+    navbar: {
+      title: 'MELT',
+      logo: {alt: 'MELT Bakery monogram', src: 'img/brand/logo-mark.svg'},
+      items: [
+        {to: '/#bakes', label: 'Our Bakes', position: 'right'},
+        {to: '/#story', label: 'Our Story', position: 'right'},
+        {to: '/#order', label: 'How to Order', position: 'right'},
+        {to: '/#faq', label: 'FAQ', position: 'right'},
+        ...(showBakeryOs ? [{to: '/bakery-os/01-vision', label: 'Bakery OS', position: 'right' as const}] : []),
+        {href: 'https://www.instagram.com/melt.bakers/', label: 'Order on Instagram', position: 'right', className: 'navbar-instagram'},
+      ],
+    },
+    footer: {style: 'dark', copyright: `© ${new Date().getFullYear()} MELT Bakery · Waterloo Region, Ontario`},
+    colorMode: {defaultMode: 'light', disableSwitch: true, respectPrefersColorScheme: false},
+  } satisfies ThemeConfig,
+};
+
+export default config;

@@ -22,7 +22,13 @@ const config: Config = {
   i18n: {defaultLocale: 'en', locales: ['en']},
   presets: [
     ['classic', {
-      docs: false,
+      docs: {
+        path: '../docs',
+        routeBasePath: 'docs',
+        sidebarPath: './sidebars.ts',
+        editUrl: 'https://github.com/dheerix/melt/edit/main/docs/',
+        showLastUpdateTime: true,
+      },
       blog: false,
       theme: {customCss: './src/css/custom.css'},
       sitemap: {changefreq: 'weekly', priority: 0.5},

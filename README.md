@@ -8,7 +8,7 @@ MELT is a founder-operated, made-to-order eggless home bakery serving Waterloo R
 - `docs/` — strategy, research, playbooks, operations, SOPs, and photography guidance
 - `private-data/` — ignored local working area; see its example README
 
-Only `website/build` is uploaded to GitHub Pages. The repository README and root `docs/` are not part of the website build.
+Only `website/build` is uploaded to GitHub Pages. Docusaurus reads the root `docs/` directory during the build and renders it under `/melt/docs/`; the repository README itself is not published as the homepage.
 
 > [!WARNING]
 > Repository visibility and website visibility are separate. A GitHub Pages deployment is normally public even when its source repository is private. Never commit customer data, residential addresses, personal contact details, recipes, supplier accounts, costs, revenue, credentials, or private incidents.
@@ -43,16 +43,16 @@ The generated rasmalai image and SVG product artwork are placeholders. Replace t
 
 ## Manage the roadmap and operating documentation
 
-Root-level `docs/` contains Bakery OS strategy and SOP templates. These files are for managing the business repository and are deliberately excluded from Docusaurus. Edit them as Markdown and keep all sensitive records outside Git.
+Root-level `docs/` contains Bakery OS strategy and SOP templates. Docusaurus renders these files for easier reading and adds authenticated GitHub edit links. Edit them locally as Markdown or use “Edit this page” while signed into GitHub.
 
-Hiding or excluding documentation from a build does not make committed files private if the repository later becomes public.
+The rendered documentation is publicly readable through GitHub Pages. Keep all sensitive records outside Git and outside these documents.
 
 ## GitHub Pages
 
 The workflow at `.github/workflows/deploy.yml`:
 
 1. Installs dependencies in `website/`.
-2. Builds only the Docusaurus landing-page application.
+2. Builds the Docusaurus landing page and the public-safe documentation sourced from `docs/`.
 3. Uploads only `website/build`.
 4. Deploys the artifact with GitHub Pages Actions.
 

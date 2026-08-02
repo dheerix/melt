@@ -5,9 +5,9 @@ export const business = {
   instagramHandle: '@melt.bakers',
   instagramUrl: 'https://www.instagram.com/melt.bakers/',
   documentation: {
-    bakeryOs: 'https://github.com/dheerix/melt/tree/main/docs',
-    roadmap: 'https://github.com/dheerix/melt/blob/main/docs/12-launch.md',
-    sops: 'https://github.com/dheerix/melt/tree/main/docs/sops',
+    bakeryOs: '/docs/vision',
+    roadmap: '/docs/launch',
+    sops: '/docs/sops/order-intake',
   },
   contactEmail: 'hello@example.com', // TODO: Confirm with MELT before displaying publicly.
   serviceArea: 'Waterloo Region, Ontario',

@@ -108,12 +108,12 @@ export default function Home(): ReactNode {
       <footer className={styles.siteFooter}>
         <div><strong>{business.name}</strong><p>{business.tagline}</p></div>
         <div><p>{business.serviceArea}</p><InstagramLink>{business.instagramHandle}</InstagramLink></div>
-        <nav className={styles.footerDocs} aria-label="Private project documentation">
+        <nav className={styles.footerDocs} aria-label="Project documentation">
           <strong>Project</strong>
-          <a href={business.documentation.bakeryOs} target="_blank" rel="noreferrer">Bakery OS <span aria-hidden="true">↗</span></a>
-          <a href={business.documentation.roadmap} target="_blank" rel="noreferrer">Roadmap <span aria-hidden="true">↗</span></a>
-          <a href={business.documentation.sops} target="_blank" rel="noreferrer">SOPs <span aria-hidden="true">↗</span></a>
-          <small>Private GitHub access required</small>
+          <Link to={business.documentation.bakeryOs}>Bakery OS</Link>
+          <Link to={business.documentation.roadmap}>Roadmap</Link>
+          <Link to={business.documentation.sops}>SOPs</Link>
+          <small>GitHub access required to edit</small>
         </nav>
         <p className={styles.footerAllergy}>{business.allergyStatement}</p><p>© {new Date().getFullYear()} {business.name}</p>
       </footer>

@@ -6,6 +6,7 @@ MELT is a founder-operated, made-to-order eggless home bakery serving Waterloo R
 
 - `website/` — the deployable Docusaurus landing page and public assets
 - `docs/` — strategy, research, playbooks, operations, SOPs, and photography guidance
+- `media/brand/` — original logo reference and high-resolution logo concept masters
 - `private-data/` — ignored local working area; see its example README
 
 Only `website/build` is uploaded to GitHub Pages. Docusaurus reads the root `docs/` directory during the build and renders it under `/melt/docs/`; the repository README itself is not published as the homepage.

@@ -106,7 +106,10 @@ export default function Home(): ReactNode {
         <section className={styles.finalCta}><p className={styles.eyebrow}>Your celebration, thoughtfully baked</p><Heading as="h2">Made for the moments worth melting into.</Heading><InstagramLink className={styles.creamButton}>Start an enquiry on Instagram <span aria-hidden="true">↗</span></InstagramLink></section>
       </main>
       <footer className={styles.siteFooter}>
-        <div><strong>{business.name}</strong><p>{business.tagline}</p></div>
+        <div className={styles.footerBrand}>
+          <img src={useBaseUrl('/img/brand/melt-primary-badge.webp')} alt="MELT Bakery, eggless cakes and bakes, just enough sweet" width="480" height="480" loading="lazy" />
+          <div><strong>{business.name}</strong><p>{business.tagline}</p></div>
+        </div>
         <div><p>{business.serviceArea}</p><InstagramLink>{business.instagramHandle}</InstagramLink></div>
         <nav className={styles.footerDocs} aria-label="Project documentation">
           <strong>Project</strong>

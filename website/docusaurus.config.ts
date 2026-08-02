@@ -9,7 +9,7 @@ const repositoryName = process.env.GITHUB_REPOSITORY_NAME ?? 'melt';
 const config: Config = {
   title: 'MELT Bakery',
   tagline: 'Purely eggless. Just enough sweet.',
-  favicon: 'img/brand/favicon.svg',
+  favicon: 'img/brand/melt-monogram.webp',
   url: `https://${githubUsername}.github.io`,
   baseUrl: `/${repositoryName}/`,
   organizationName: githubUsername,
@@ -46,14 +46,13 @@ const config: Config = {
     },
   ],
   themeConfig: {
-    image: 'img/brand/social-card.svg',
+    image: 'img/brand/melt-horizontal-wordmark.webp',
     metadata: [
       {name: 'description', content: 'Eggless, made-to-order celebration bakes in Waterloo Region, Ontario.'},
       {property: 'og:type', content: 'website'},
     ],
     navbar: {
-      title: 'MELT',
-      logo: {alt: 'MELT Bakery monogram', src: 'img/brand/logo-mark.svg'},
+      logo: {alt: 'MELT Bakery — purely eggless, just enough sweet', src: 'img/brand/melt-horizontal-wordmark.webp'},
       items: [
         {to: '/#bakes', label: 'Our Bakes', position: 'right'},
         {to: '/#story', label: 'Our Story', position: 'right'},

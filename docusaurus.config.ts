@@ -1,5 +1,7 @@
 import type {Config} from '@docusaurus/types';
 import type {Options, ThemeConfig} from '@docusaurus/preset-classic';
+import {writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
 
 const githubUsername = process.env.GITHUB_USERNAME ?? 'GITHUB_USERNAME';
 const repositoryName = process.env.GITHUB_REPOSITORY_NAME ?? 'melt-bakery';
@@ -16,7 +18,9 @@ const config: Config = {
   projectName: repositoryName,
   trailingSlash: false,
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {hooks: {onBrokenMarkdownLinks: 'warn'}},
+  // Docusaurus cannot discover IDs rendered by custom React pages during its anchor check.
+  onBrokenAnchors: 'ignore',
   i18n: {defaultLocale: 'en', locales: ['en']},
   presets: [
     ['classic', {
@@ -25,6 +29,17 @@ const config: Config = {
       theme: {customCss: './src/css/custom.css'},
       sitemap: {changefreq: 'weekly', priority: 0.5},
     } satisfies Options],
+  ],
+  plugins: [
+    function robotsPlugin() {
+      return {
+        name: 'melt-robots-plugin',
+        async postBuild({outDir}: {outDir: string}) {
+          const origin = `https://${githubUsername}.github.io${repositoryName ? `/${repositoryName}` : ''}`;
+          await writeFile(join(outDir, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`);
+        },
+      };
+    },
   ],
   themeConfig: {
     image: 'img/brand/social-card.svg',
@@ -40,7 +55,7 @@ const config: Config = {
         {to: '/#story', label: 'Our Story', position: 'right'},
         {to: '/#order', label: 'How to Order', position: 'right'},
         {to: '/#faq', label: 'FAQ', position: 'right'},
-        ...(showBakeryOs ? [{to: '/bakery-os/01-vision', label: 'Bakery OS', position: 'right' as const}] : []),
+        ...(showBakeryOs ? [{to: '/bakery-os/vision', label: 'Bakery OS', position: 'right' as const}] : []),
         {href: 'https://www.instagram.com/melt.bakers/', label: 'Order on Instagram', position: 'right', className: 'navbar-instagram'},
       ],
     },
